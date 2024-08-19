@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((gb.SX, gb.SY))
 doExit = False
 clock = pygame.time.Clock()
 
-test = bonsai(Vector2(gb.SX/2, gb.SY * (4/5)))
+test = bonsai(Vector2(gb.SX/2, gb.SY * (54/55)))
 
 while not doExit:
     delta = clock.tick(gb.FPS)/1000
@@ -18,6 +18,11 @@ while not doExit:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             doExit = True
+
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_r]:
+        test = bonsai(Vector2(gb.SX/2, gb.SY * (54/55)))
 
     test.draw(screen)
 
