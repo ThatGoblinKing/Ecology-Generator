@@ -25,6 +25,19 @@ from branch import Branch
     - something with the empty dummy Leaf class
 
     - Wind and updating the branch positions relative to each parent branch
+
+
+
+    Cool keyboard shortcuts:
+    - ctrl + bracket keys
+        Move your line back and forth by a tab
+    
+    - ctrl + shift + Enter
+        Create a new line above your selected line
+
+    - alt + numpad
+        You can create a bunch of super cool symbols like: ™ü╚▼☻Y
+        Look up a list of the commands to figure out which ones are there if you need
 """
 
 pygame.init
