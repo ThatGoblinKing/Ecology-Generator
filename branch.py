@@ -5,6 +5,8 @@ import numpy as np
 Installation of numpy is online."""
 import globals as gb
 from pygame import Vector2
+"""for type hinting"""
+from typing import Self
 
 
 """
@@ -54,8 +56,8 @@ def sin(angle : float) -> float:
 
 class Branch:
     """
-    ## Core branch class
-    Please see the top of branch.py for more details
+        ## Core branch class
+        Please see the top of branch.py for more details
     """
     def __init__(self, 
                  pos : Vector2|tuple = (0, 0),
@@ -151,7 +153,7 @@ class Branch:
         """self.corners is a list of 4 Vector2's of each of the corners of the branch."""
         self.corners = self.getPosSides(self.pos, self.parentWidth, self.parentAngle) + self.getPosSides(self.getEndPos(), self.width * (self.decay), self.angle)
 
-        def splitBranch():
+        def splitBranch() -> None:
             """
                 When splitting a branch in two, this function is used to define the children of the branch.
 
@@ -164,8 +166,8 @@ class Branch:
             self.child.append(self.newBranch(branchesCounter=0))
 
             """
-            This code determines the angle of the branch. It sets an offset and then give the angle change as
-            a range of [self.angleChange-15, -15] to [15, 15+self.angleChange].
+                This code determines the angle of the branch. It sets an offset and then give the angle change as
+                a range of [self.angleChange-15, -15] to [15, 15+self.angleChange].
             """
             offset = random.randint(0, 1)
             offset = offset if offset > 0 else -1
@@ -176,15 +178,15 @@ class Branch:
 
 
         """If the decay is more than a min size, then the branch can split."""
-        if self.decay > 0.2:
+        if self.decay > .1:
             """Logic controlling if a branch should split or not."""
             if self.branchesSinceSplit == self.branchSplit and self.numOfBranches < self.maxBranchSplits:
                 """Threading"""
                 if len(gb.ThreadList) <= gb.MaxThreads:
                     """
-                    target is the function to run with the thread.
-                    daemon is complicated, look it up if needed.
-                    Make sure you store the somewhere so that it doesn't kill itself before it starts.
+                        target is the function to run with the thread.
+                        daemon is complicated, look it up if needed.
+                        Make sure you store the somewhere so that it doesn't kill itself before it starts.
                     """
                     listenerThread = threading.Thread(target=splitBranch, daemon=False)
                     listenerThread.start()
@@ -198,7 +200,7 @@ class Branch:
             """Otherwise, the branch should have a leaf at the end."""
             self.child = Leaf(self.getEndPos())
 
-    def newBranch(self, angle : float = None, branchesCounter : int = None):
+    def newBranch(self, angle : float = None, branchesCounter : int = None) -> Self:
         """
             This function is used to make new branches without having to input all variables 
             that are required to be passed when making a new branch, leaving only the variable that 
@@ -278,7 +280,7 @@ class Leaf:
     def __init__(self, pos : Vector2) -> None:
         self.pos = pos
 
-    def draw(self, screen : pygame.surface):
+    def draw(self, screen : pygame.surface) -> None:
         """Can be used to draw the end points as "leaves"/green circles. Otherwise is just a dummy function to avoid bugs."""
         pass
         # pygame.draw.circle(screen, (0, 255, 0), self.pos, 1)

@@ -2,6 +2,7 @@ import pygame
 import globals as gb
 from pygame import Vector2
 from branch import Branch
+import random
 
 """For information on how exactly the program functions, please go to branch.py."""
 
