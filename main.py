@@ -1,5 +1,5 @@
 import pygame
-import globals as gb
+import constants as const
 from pygame import Vector2
 from branch import Branch
 import random
@@ -43,16 +43,16 @@ import random
 
 pygame.init
 
-screen = pygame.display.set_mode((gb.SX, gb.SY))
+screen = pygame.display.set_mode((const.SCREEN_X, const.SCREEN_Y))
 
 doExit = False
 clock = pygame.time.Clock()
 
-tree = Branch(Vector2(gb.SX/2, gb.SY * (54/55)))
+tree = Branch(Vector2(const.SCREEN_X/2, const.SCREEN_Y * (54/55)))
 
 while not doExit:
-    delta = clock.tick(gb.FPS)/1000
-    screen.fill(gb.BG)
+    delta = clock.tick(const.FPS)/1000
+    screen.fill(const.BACKGROUND_COLOR)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             doExit = True
@@ -60,9 +60,9 @@ while not doExit:
     """Reset Tree."""
     keys = pygame.key.get_pressed()
     if keys[pygame.K_r]:
-        tree = Branch(Vector2(gb.SX/2, gb.SY * (54/55)))
+        tree = Branch(Vector2(const.SCREEN_X/2, const.SCREEN_Y * (54/55)))
 
-    tree.draw(screen)
+    tree.drawChunk(screen)
 
     pygame.display.flip()
 pygame.quit()
