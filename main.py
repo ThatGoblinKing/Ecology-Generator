@@ -47,8 +47,9 @@ screen = pygame.display.set_mode((const.SCREEN_X, const.SCREEN_Y))
 
 doExit = False
 clock = pygame.time.Clock()
+branches : list[Branch] = []
 
-tree = Branch(Vector2(const.SCREEN_X/2, const.SCREEN_Y * (54/55)))
+branches.append(Branch(branchList=branches,pos=Vector2(const.SCREEN_X/2, const.SCREEN_Y)))
 
 while not doExit:
     delta = clock.tick(const.FPS)/1000
@@ -60,9 +61,11 @@ while not doExit:
     """Reset Tree."""
     keys = pygame.key.get_pressed()
     if keys[pygame.K_r]:
-        tree = Branch(Vector2(const.SCREEN_X/2, const.SCREEN_Y * (54/55)))
+        branches = []
+        branches.append(Branch(branchList=branches,pos=Vector2(const.SCREEN_X/2, const.SCREEN_Y)))
 
-    tree.drawChunk(screen)
+    for branch in branches:
+        branch.draw(screen)
 
     pygame.display.flip()
 pygame.quit()
